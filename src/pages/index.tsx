@@ -3,30 +3,20 @@ import { useState } from 'react';
 
 import Table from '@/components/datatable/Table';
 import Pagination from '@/components/pagination/Pagination';
+import { useUsers } from '@/hooks/useUsers';
 import { USER_LIST_COLUMNS } from '@/libs/THeadColumns';
-import { TUser } from '@/libs/types';
 
 import styles from '../styles/Home.module.css';
 
-const DUMMY_USERS_LIST: TUser[] = [
-  {
-    id: 1,
-    email: 'george.bluth@reqres.in',
-    first_name: 'George',
-    last_name: 'Bluth',
-    avatar: 'https://reqres.in/img/faces/1-image.jpg'
-  },
-  {
-    id: 2,
-    email: 'janet.weaver@reqres.in',
-    first_name: 'Janet',
-    last_name: 'Weaver',
-    avatar: 'https://reqres.in/img/faces/2-image.jpg'
-  }
-];
-
 export default function Home() {
   const [activePage, setActivePage] = useState(1);
+
+  const { data, isFetching, isLoading } = useUsers();
+
+  if (isLoading) return <div>Loading</div>;
+
+  if (isFetching) return <div>Fetching users</div>;
+
   return (
     <div className={styles.container}>
       <Head>
@@ -37,7 +27,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <Table
-          data={DUMMY_USERS_LIST}
+          data={data ? data.data : []}
           columns={USER_LIST_COLUMNS}
           emptyData="no users found"
         />
