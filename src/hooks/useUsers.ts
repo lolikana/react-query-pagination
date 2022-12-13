@@ -3,12 +3,16 @@ import axios from 'axios';
 
 import { TUsers } from '@/libs/types';
 
-export const getUsers = async (): Promise<TUsers> => {
-  const res = await axios.get('https://reqres.in/api/users?page=1');
+export const getUsers = async (activePage: number): Promise<TUsers> => {
+  const res = await axios.get(`https://reqres.in/api/users?page=${activePage}`);
   const { data } = res;
   return data;
 };
 
-export const useUsers = () => {
-  return useQuery({ queryKey: ['users'], queryFn: () => getUsers() });
+export const useUsers = (activePage: number) => {
+  return useQuery({
+    queryKey: ['users', activePage],
+    queryFn: () => getUsers(activePage),
+    keepPreviousData: true
+  });
 };

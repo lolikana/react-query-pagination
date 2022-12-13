@@ -11,7 +11,7 @@ import styles from '../styles/Home.module.css';
 export default function Home() {
   const [activePage, setActivePage] = useState(1);
 
-  const { data, isFetching, isLoading } = useUsers();
+  const { data, isFetching, isLoading } = useUsers(activePage);
 
   if (isLoading) return <div>Loading</div>;
 
