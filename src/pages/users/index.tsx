@@ -25,7 +25,7 @@ const Users: NextPage = () => {
         page: activePage
       }
     });
-  }, [perPage, activePage]);
+  }, [perPage, activePage, router]);
 
   if (isLoading) return <div>Loading</div>;
 
@@ -49,7 +49,7 @@ const Users: NextPage = () => {
         pages={data ? data.total_pages : 0}
       />
       <div style={{ textAlign: 'center', margin: '2rem 0' }}>
-        <Link href={'/'}>
+        <Link href={'/'} replace>
           <button style={{ padding: '1rem 2rem' }}>Go back Index</button>
         </Link>
       </div>
