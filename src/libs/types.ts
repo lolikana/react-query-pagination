@@ -5,11 +5,10 @@ export type TUser = {
   last_name: string;
   avatar: string;
 };
-
 export interface TUsers {
-  page: number;
   per_page: number;
   total: number;
-  total_page: number;
+  total_pages: number;
+  page: number;
   data: TUser[];
 }

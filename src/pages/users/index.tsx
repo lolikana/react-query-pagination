@@ -22,7 +22,11 @@ const Users: NextPage = () => {
         columns={USER_LIST_COLUMNS}
         emptyData="no users found"
       />
-      <Pagination activePage={activePage} setActivePage={setActivePage} pages={2} />
+      <Pagination
+        activePage={activePage}
+        setActivePage={setActivePage}
+        pages={data ? data.total_pages : 0}
+      />
     </>
   );
 };
