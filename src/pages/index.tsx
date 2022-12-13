@@ -1,22 +1,9 @@
 import Head from 'next/head';
-import { useState } from 'react';
-
-import Table from '@/components/datatable/Table';
-import Pagination from '@/components/pagination/Pagination';
-import { useUsers } from '@/hooks/useUsers';
-import { USER_LIST_COLUMNS } from '@/libs/THeadColumns';
+import Link from 'next/link';
 
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
-  const [activePage, setActivePage] = useState(1);
-
-  const { data, isFetching, isLoading } = useUsers(activePage);
-
-  if (isLoading) return <div>Loading</div>;
-
-  if (isFetching) return <div>Fetching users</div>;
-
   return (
     <div className={styles.container}>
       <Head>
@@ -26,12 +13,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Table
-          data={data ? data.data : []}
-          columns={USER_LIST_COLUMNS}
-          emptyData="no users found"
-        />
-        <Pagination activePage={activePage} setActivePage={setActivePage} pages={2} />
+        <Link href={'/users'}>Go to users list</Link>
       </main>
     </div>
   );
