@@ -5,16 +5,16 @@ import { TUsers } from '@/libs/types';
 
 const url = 'http://localhost:4000';
 
-export const getUsers = async (activePage: number): Promise<TUsers> => {
-  const res = await axios.get(`${url}/users?page=${activePage}`);
+export const getUsers = async (activePage: number, perPage: string): Promise<TUsers> => {
+  const res = await axios.get(`${url}/users_per_page=${perPage}?page=${activePage}`);
   const { data } = res;
   return data[0];
 };
 
-export const useUsers = (activePage: number) => {
+export const useUsers = (activePage: number, perPage: string) => {
   return useQuery({
-    queryKey: ['users', activePage],
-    queryFn: () => getUsers(activePage),
+    queryKey: ['users', activePage, perPage],
+    queryFn: () => getUsers(activePage, perPage),
     keepPreviousData: true
   });
 };
