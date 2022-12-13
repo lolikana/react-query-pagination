@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 import Table from '@/components/datatable/Table';
 import SelectPerPage from '@/components/form/SelectPerPage';
@@ -10,8 +11,13 @@ import { USER_LIST_COLUMNS } from '@/libs/THeadColumns';
 const Users: NextPage = () => {
   const [activePage, setActivePage] = useState(1);
   const [perPage, setPerPage] = useState('5');
+  const router = useRouter();
 
   const { data, isFetching, isLoading } = useUsers(activePage, perPage);
+
+  useEffect(() => {
+    router.replace(`/users?per_page=${perPage}&page=${activePage}`);
+  }, [perPage, activePage]);
 
   if (isLoading) return <div>Loading</div>;
 
