@@ -1,0 +1,37 @@
+@import '../../variables.scss';
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+
+  div {
+    width: 33px;
+    height: 33px;
+    background: $__light__vampires;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $__secondarycolor;
+    margin-right: 20px;
+    cursor: pointer;
+
+    &.active {
+      background-color: $__primarycolor;
+      color: $__secondarycolor;
+    }
+
+    &.pagination-arrow {
+      font-size: 24px;
+      color: $__secondarycolor;
+    }
+
+    &.pagination-arrow.inactive {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+}

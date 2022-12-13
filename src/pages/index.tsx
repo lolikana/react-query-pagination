@@ -1,6 +1,8 @@
 import Head from 'next/head';
+import { useState } from 'react';
 
 import Table from '@/components/datatable/Table';
+import Pagination from '@/components/pagination/Pagination';
 import { USER_LIST_COLUMNS } from '@/libs/THeadColumns';
 import { TUser } from '@/libs/types';
 
@@ -24,6 +26,7 @@ const DUMMY_USERS_LIST: TUser[] = [
 ];
 
 export default function Home() {
+  const [activePage, setActivePage] = useState(1);
   return (
     <div className={styles.container}>
       <Head>
@@ -38,6 +41,7 @@ export default function Home() {
           columns={USER_LIST_COLUMNS}
           emptyData="no users found"
         />
+        <Pagination activePage={activePage} setActivePage={setActivePage} pages={2} />
       </main>
     </div>
   );
