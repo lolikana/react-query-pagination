@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
@@ -16,7 +17,14 @@ const Users: NextPage = () => {
   const { data, isFetching, isLoading } = useUsers(activePage, perPage);
 
   useEffect(() => {
-    router.replace(`/users?per_page=${perPage}&page=${activePage}`);
+    // router.replace(`/users?per_page=${perPage}&page=${activePage}`);
+    router.push({
+      pathname: '/users',
+      query: {
+        per_page: perPage,
+        page: activePage
+      }
+    });
   }, [perPage, activePage]);
 
   if (isLoading) return <div>Loading</div>;
@@ -40,6 +48,11 @@ const Users: NextPage = () => {
         setActivePage={setActivePage}
         pages={data ? data.total_pages : 0}
       />
+      <div style={{ textAlign: 'center', margin: '2rem 0' }}>
+        <Link href={'/'}>
+          <button style={{ padding: '1rem 2rem' }}>Go back Index</button>
+        </Link>
+      </div>
     </>
   );
 };

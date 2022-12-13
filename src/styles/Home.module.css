@@ -1,3 +1,13 @@
-.container {
-  margin: 1rem 2rem;
+.main {
+  height: 100vh;
+}
+
+.main__link {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main__link button {
+  padding: 1rem 2rem;
 }

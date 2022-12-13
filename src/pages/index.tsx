@@ -13,7 +13,11 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Link href={'/users'}>Go to users list</Link>
+        <div className={styles.main__link}>
+          <Link href={'/users'}>
+            <button>Go to users list</button>
+          </Link>
+        </div>
       </main>
     </div>
   );
