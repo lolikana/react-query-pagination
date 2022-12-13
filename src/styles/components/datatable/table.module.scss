@@ -33,6 +33,7 @@
     th {
       border: 1px solid $__light-goose-grays;
       padding: 0.5rem 2.5rem 0.5rem 2rem;
+      text-align: center;
     }
 
     &_empty {
@@ -41,10 +42,6 @@
         text-align: center;
         padding: 2rem 0;
       }
-    }
-
-    &_center {
-      text-align: center;
     }
   }
 }
