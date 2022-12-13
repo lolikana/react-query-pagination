@@ -40,7 +40,7 @@ const Pagination: FC<Props> = props => {
         className={`${styles['pagination-arrow ']} ${
           activePage === pages ? 'inactive' : ''
         }`}
-        onClick={() => activePage !== 1 && setActivePage((page: number) => page + 1)}
+        onClick={() => activePage !== pages && setActivePage((page: number) => page + 1)}
       >
         {'>'}
       </div>
