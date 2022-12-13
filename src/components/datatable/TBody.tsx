@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-import styles from '@/styles/components/DataTable/table.module.scss';
+import styles from '@/styles/components/datatable/table.module.scss';
 
 import { ITableColumns } from './types/types';
 
