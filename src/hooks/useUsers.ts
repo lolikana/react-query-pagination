@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { TUsers } from '@/libs/types';
 
-const url = 'http://localhost:4000';
+const url = 'https://63992ce7fe03352a94e80a19.mockapi.io';
 
 export const getUsers = async (activePage: number, perPage: string): Promise<TUsers> => {
   const res = await axios.get(`${url}/users?per_page=${perPage}&page=${activePage}`);
