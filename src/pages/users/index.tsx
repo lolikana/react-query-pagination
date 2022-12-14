@@ -6,34 +6,35 @@ import React, { useEffect, useState } from 'react';
 import Table from '@/components/datatable/Table';
 import SelectPerPage from '@/components/form/SelectPerPage';
 import Pagination from '@/components/pagination/Pagination';
-import { useUsers } from '@/hooks/useUsers';
+import { useUsers, useUsersTotal } from '@/hooks/useUsers';
 import { USER_LIST_COLUMNS } from '@/libs/THeadColumns';
 
 const Users: NextPage = () => {
   const [activePage, setActivePage] = useState(1);
   const [perPage, setPerPage] = useState('5');
   const router = useRouter();
-  
+
   const { data, isFetching, isLoading } = useUsers(activePage, perPage);
-  
+  const { data: dataTotal } = useUsersTotal();
+
   useEffect(() => {
     router.push({
       pathname: '/users',
       query: {
-        per_page: perPage,
+        limit: perPage,
         page: activePage
       }
     });
   }, [perPage]);
 
   if (isLoading) return <div>Loading</div>;
-  
+
   if (isFetching) return <div>Fetching users</div>;
 
   return (
     <>
       <Table
-        data={data ? data.data : []}
+        data={data ? data : []}
         columns={USER_LIST_COLUMNS}
         emptyData="no users found"
       />
@@ -45,7 +46,7 @@ const Users: NextPage = () => {
       <Pagination
         activePage={activePage}
         setActivePage={setActivePage}
-        pages={data ? data.total_pages : 0}
+        pages={dataTotal ? +dataTotal.total / +perPage : 0}
         perPage={perPage}
       />
       <Link

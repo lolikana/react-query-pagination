@@ -19,8 +19,9 @@ const Pagination: FC<Props> = props => {
       elements.push(
         <Link
           onClick={() => setActivePage(i)}
-          href={`/users?per_page=${perPage}&page=${i}`}
+          href={`/users?limit=${perPage}&page=${i}`}
           key={i}
+          scroll={false}
           replace
         >
           <div className={styles[`${activePage === i ? 'active' : ''}`]}>
@@ -36,7 +37,8 @@ const Pagination: FC<Props> = props => {
     <div className={styles.pagination}>
       <Link
         onClick={() => activePage !== 1 && setActivePage((page: number) => page - 1)}
-        href={`/users?per_page=${perPage}&page=${activePage !== 1 ? activePage - 1 : 1}`}
+        href={`/users?limit=${perPage}&page=${activePage !== 1 ? activePage - 1 : 1}`}
+        scroll={false}
         replace
       >
         <div
@@ -50,9 +52,10 @@ const Pagination: FC<Props> = props => {
       {getPages()}
       <Link
         onClick={() => activePage !== pages && setActivePage((page: number) => page + 1)}
-        href={`/users?per_page=${perPage}&page=${
+        href={`/users?limit=${perPage}&page=${
           activePage !== pages ? activePage + 1 : pages
         }`}
+        scroll={false}
         replace
       >
         <div
