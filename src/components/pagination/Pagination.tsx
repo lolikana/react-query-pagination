@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { Dispatch, FC, SetStateAction } from 'react';
 
 import styles from '@/styles/components/pagination/pagination.module.scss';
@@ -6,22 +7,26 @@ type Props = {
   activePage: number;
   pages: number;
   setActivePage: Dispatch<SetStateAction<number>>;
+  perPage: string;
 };
 
 const Pagination: FC<Props> = props => {
-  const { activePage, pages, setActivePage } = props;
+  const { activePage, pages, setActivePage, perPage } = props;
 
   const getPages = () => {
     const elements = [];
     for (let i = 1; i <= pages; i++) {
       elements.push(
-        <div
-          className={styles[`${activePage === i ? 'active' : ''}`]}
+        <Link
           onClick={() => setActivePage(i)}
+          href={`/users?per_page=${perPage}&page=${i}`}
           key={i}
+          replace
         >
-          {i < 10 ? `0${i}` : i}
-        </div>
+          <div className={styles[`${activePage === i ? 'active' : ''}`]}>
+            {i < 10 ? `0${i}` : i}
+          </div>
+        </Link>
       );
     }
     return elements;
@@ -29,21 +34,35 @@ const Pagination: FC<Props> = props => {
 
   return (
     <div className={styles.pagination}>
-      <div
-        className={`${styles['pagination-arrow ']} ${activePage === 1 ? 'inactive' : ''}`}
+      <Link
         onClick={() => activePage !== 1 && setActivePage((page: number) => page - 1)}
+        href={`/users?per_page=${perPage}&page=${activePage !== 1 ? activePage - 1 : 1}`}
+        replace
       >
-        {'<'}
-      </div>
+        <div
+          className={`${styles['pagination-arrow ']} ${
+            activePage === 1 ? 'inactive' : ''
+          }`}
+        >
+          {'<'}
+        </div>
+      </Link>
       {getPages()}
-      <div
-        className={`${styles['pagination-arrow ']} ${
-          activePage === pages ? 'inactive' : ''
-        }`}
+      <Link
         onClick={() => activePage !== pages && setActivePage((page: number) => page + 1)}
+        href={`/users?per_page=${perPage}&page=${
+          activePage !== pages ? activePage + 1 : pages
+        }`}
+        replace
       >
-        {'>'}
-      </div>
+        <div
+          className={`${styles['pagination-arrow ']} ${
+            activePage === pages ? 'inactive' : ''
+          }`}
+        >
+          {'>'}
+        </div>
+      </Link>
     </div>
   );
 };

@@ -1,0 +1,13 @@
+@import './variables.scss';
+
+.main {
+  height: 100vh;
+
+  &__link {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem 2rem;
+    background-color: $__gray__dark;
+  }
+}

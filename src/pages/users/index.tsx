@@ -13,11 +13,10 @@ const Users: NextPage = () => {
   const [activePage, setActivePage] = useState(1);
   const [perPage, setPerPage] = useState('5');
   const router = useRouter();
-
+  
   const { data, isFetching, isLoading } = useUsers(activePage, perPage);
-
+  
   useEffect(() => {
-    // router.replace(`/users?per_page=${perPage}&page=${activePage}`);
     router.push({
       pathname: '/users',
       query: {
@@ -25,10 +24,10 @@ const Users: NextPage = () => {
         page: activePage
       }
     });
-  }, [perPage, activePage, router]);
+  }, [perPage]);
 
   if (isLoading) return <div>Loading</div>;
-
+  
   if (isFetching) return <div>Fetching users</div>;
 
   return (
@@ -47,12 +46,21 @@ const Users: NextPage = () => {
         activePage={activePage}
         setActivePage={setActivePage}
         pages={data ? data.total_pages : 0}
+        perPage={perPage}
       />
-      <div style={{ textAlign: 'center', margin: '2rem 0' }}>
-        <Link href={'/'} replace>
-          <button style={{ padding: '1rem 2rem' }}>Go back Index</button>
-        </Link>
-      </div>
+      <Link
+        href={'/'}
+        style={{
+          display: 'block',
+          textAlign: 'center',
+          margin: '2rem auto',
+          padding: '1rem 2rem',
+          backgroundColor: '#6e6b7b',
+          width: 'fit-content'
+        }}
+      >
+        <div>Go back Index</div>
+      </Link>
     </>
   );
 };

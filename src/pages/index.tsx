@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Home.module.scss';
 
 export default function Home() {
   return (
@@ -13,11 +13,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div className={styles.main__link}>
-          <Link href={'/users'}>
-            <button>Go to users list</button>
-          </Link>
-        </div>
+        <Link href={'/users'}>
+          <div className={styles.main__link}>Go to users list</div>
+        </Link>
       </main>
     </div>
   );
