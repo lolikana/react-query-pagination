@@ -8,11 +8,14 @@ import { queryClient } from '@/libs/ReactQuery';
 import styles from '../styles/Home.module.scss';
 
 export default function Home() {
-  
   useEffect(() => {
     queryClient.prefetchQuery({
       queryKey: ['users', 'first_name', 'asc', 1, '5'],
       queryFn: () => getUsers('first_name', 'asc', 1, '5')
+    });
+    queryClient.prefetchQuery({
+      queryKey: ['users', 'first_name', 'asc', 2, '5'],
+      queryFn: () => getUsers('first_name', 'asc', 2, '5')
     });
   }, []);
 
