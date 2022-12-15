@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 import Table from '@/components/datatable/Table';
 import SelectPerPage from '@/components/form/SelectPerPage';
-import Pagination from '@/components/pagination/Pagination';
+import Paginations from '@/components/pagination/Pagination';
 import { getUsers, useUsers, useUsersTotal } from '@/hooks/useUsers';
 import { queryClient } from '@/libs/ReactQuery';
 import { USER_LIST_COLUMNS } from '@/libs/THeadColumns';
@@ -31,23 +31,36 @@ const Users: NextPage = () => {
   };
 
   useEffect(() => {
-    router.push({
-      pathname: '/users',
-      query: {
-        sortBy: sortBy,
-        order: order,
-        limit: perPage,
-        page: activePage
-      }
-    });
+    router.push(
+      {
+        pathname: '/users',
+        query: {
+          sortBy: sortBy,
+          order: order,
+          limit: perPage,
+          page: activePage
+        }
+      },
+      undefined,
+      { scroll: false }
+    );
   }, [perPage, sortBy, order, activePage]);
 
   useEffect(() => {
-    if (!isPreviousData && data) {
-      queryClient.prefetchQuery({
-        queryKey: ['users', sortBy, order, activePage + 1, perPage],
-        queryFn: () => getUsers(sortBy, order, activePage + 1, perPage)
-      });
+    if (!isPreviousData && data && dataTotal) {
+      if (activePage !== +dataTotal.total / +perPage) {
+        queryClient.prefetchQuery({
+          queryKey: ['users', sortBy, order, activePage + 1, perPage],
+          queryFn: () => getUsers(sortBy, order, activePage + 1, perPage)
+        });
+      }
+
+      if (activePage !== 1) {
+        queryClient.prefetchQuery({
+          queryKey: ['users', sortBy, order, activePage - 1, perPage],
+          queryFn: () => getUsers(sortBy, order, activePage - 1, perPage)
+        });
+      }
     }
   }, [data, isPreviousData, queryClient]);
 
@@ -65,11 +78,14 @@ const Users: NextPage = () => {
         setActivePage={setActivePage}
         perPage={perPage}
       />
-      <Pagination
-        activePage={activePage}
-        setActivePage={setActivePage}
-        pages={dataTotal ? +dataTotal.total / +perPage : 0}
-        perPage={perPage}
+      <Paginations
+        currentPage={activePage}
+        totalCount={dataTotal ? +dataTotal.total : 0}
+        pageSize={Number(perPage)}
+        onPageChange={setActivePage}
+        siblingCount={1}
+        sortBy={sortBy}
+        order={order}
       />
       <Link
         href={'/'}
