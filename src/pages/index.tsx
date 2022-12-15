@@ -1,9 +1,21 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useEffect } from 'react';
+
+import { getUsers } from '@/hooks/useUsers';
+import { queryClient } from '@/libs/ReactQuery';
 
 import styles from '../styles/Home.module.scss';
 
 export default function Home() {
+  
+  useEffect(() => {
+    queryClient.prefetchQuery({
+      queryKey: ['users', 'first_name', 'asc', 1, '5'],
+      queryFn: () => getUsers('first_name', 'asc', 1, '5')
+    });
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>

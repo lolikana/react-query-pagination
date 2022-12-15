@@ -6,30 +6,50 @@ import React, { useEffect, useState } from 'react';
 import Table from '@/components/datatable/Table';
 import SelectPerPage from '@/components/form/SelectPerPage';
 import Pagination from '@/components/pagination/Pagination';
-import { useUsers, useUsersTotal } from '@/hooks/useUsers';
+import { getUsers, useUsers, useUsersTotal } from '@/hooks/useUsers';
+import { queryClient } from '@/libs/ReactQuery';
 import { USER_LIST_COLUMNS } from '@/libs/THeadColumns';
 
 const Users: NextPage = () => {
   const [activePage, setActivePage] = useState(1);
   const [perPage, setPerPage] = useState('5');
+  const [sortBy, setSortBy] = useState<string>('first_name');
+  const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const router = useRouter();
 
-  const { data, isFetching, isLoading } = useUsers(activePage, perPage);
+  const { data, isPreviousData, isFetching } = useUsers(
+    sortBy,
+    order,
+    activePage,
+    perPage
+  );
   const { data: dataTotal } = useUsersTotal();
+
+  const handleSorting = (accessor: string, order: 'asc' | 'desc') => {
+    setSortBy(accessor);
+    setOrder(order);
+  };
 
   useEffect(() => {
     router.push({
       pathname: '/users',
       query: {
+        sortBy: sortBy,
+        order: order,
         limit: perPage,
         page: activePage
       }
     });
-  }, [perPage]);
+  }, [perPage, sortBy, order]);
 
-  if (isLoading) return <div>Loading</div>;
-
-  if (isFetching) return <div>Fetching users</div>;
+  useEffect(() => {
+    if (!isPreviousData && data) {
+      queryClient.prefetchQuery({
+        queryKey: ['users', sortBy, order, activePage + 1, perPage],
+        queryFn: () => getUsers(sortBy, order, activePage + 1, perPage)
+      });
+    }
+  }, [data, isPreviousData, activePage, queryClient]);
 
   return (
     <>
@@ -37,6 +57,8 @@ const Users: NextPage = () => {
         data={data ? data : []}
         columns={USER_LIST_COLUMNS}
         emptyData="no users found"
+        handleSorting={handleSorting}
+        isFetching={isFetching}
       />
       <SelectPerPage
         setPerPage={setPerPage}

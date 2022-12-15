@@ -9,10 +9,11 @@ type Props<T> = {
   tableData: T[];
   columns: ITableColumns[];
   emptyData: string;
+  isFetching: boolean;
 };
 
 const TBody = <T extends Record<string, any>>(props: Props<T>) => {
-  const { tableData, columns, emptyData } = props;
+  const { tableData, columns, emptyData, isFetching } = props;
 
   if (tableData.length === 0)
     return (
@@ -23,6 +24,15 @@ const TBody = <T extends Record<string, any>>(props: Props<T>) => {
       </tbody>
     );
 
+  if (isFetching) {
+    return (
+      <tbody>
+        <tr className={styles.container__table_empty}>
+          <td colSpan={columns.length + 1}>Fetching data</td>
+        </tr>
+      </tbody>
+    );
+  }
   return (
     <tbody>
       {tableData.map(data => (

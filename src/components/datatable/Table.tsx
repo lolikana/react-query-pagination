@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import { useSortableTable } from '@/hooks/useSortableTable';
 import styles from '@/styles/components/datatable/table.module.scss';
 
 import TBody from './TBody';
@@ -11,12 +10,13 @@ type Props<T> = {
   data: T[];
   columns: ITableColumns[];
   emptyData: string;
+  handleSorting: (sortField: string, sortOrder: 'asc' | 'desc') => void;
+  isFetching: boolean;
 };
 
 const Table = <T extends Record<string, any>>(props: Props<T>) => {
-  const { data, columns, emptyData } = props;
-  const [tableData, handleSorting] = useSortableTable(data);
-  const [reloadData, setReloadData] = useState(tableData);
+  const { data, columns, emptyData, handleSorting, isFetching } = props;
+  const [reloadData, setReloadData] = useState(data);
 
   useEffect(() => {
     setReloadData(data);
@@ -27,7 +27,11 @@ const Table = <T extends Record<string, any>>(props: Props<T>) => {
       <div className={styles.container}>
         <table className={styles.container__table}>
           <THead {...{ columns, handleSorting }} />
-          <TBody {...{ columns, emptyData }} tableData={reloadData} />
+          <TBody
+            {...{ columns, emptyData }}
+            tableData={reloadData}
+            isFetching={isFetching}
+          />
         </table>
       </div>
     </>
