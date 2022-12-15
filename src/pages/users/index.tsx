@@ -40,7 +40,7 @@ const Users: NextPage = () => {
         page: activePage
       }
     });
-  }, [perPage, sortBy, order]);
+  }, [perPage, sortBy, order, activePage]);
 
   useEffect(() => {
     if (!isPreviousData && data) {
@@ -49,7 +49,7 @@ const Users: NextPage = () => {
         queryFn: () => getUsers(sortBy, order, activePage + 1, perPage)
       });
     }
-  }, [data, isPreviousData, activePage, queryClient]);
+  }, [data, isPreviousData, queryClient]);
 
   return (
     <>
