@@ -16,15 +16,7 @@ type Props = {
 };
 
 const Pagination: FC<Props> = props => {
-  const {
-    onPageChange,
-    totalCount,
-    siblingCount = 1,
-    currentPage,
-    pageSize,
-    sortBy,
-    order
-  } = props;
+  const { onPageChange, totalCount, siblingCount = 1, currentPage, pageSize } = props;
 
   const paginationRange =
     (usePagination({
