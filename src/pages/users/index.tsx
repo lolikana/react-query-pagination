@@ -17,7 +17,7 @@ const Users: NextPage = () => {
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const router = useRouter();
 
-  const { data, isPreviousData, isFetching } = useUsers(
+  const { data, isPreviousData, isLoading } = useUsers(
     sortBy,
     order,
     activePage,
@@ -71,7 +71,7 @@ const Users: NextPage = () => {
         columns={USER_LIST_COLUMNS}
         emptyData="no users found"
         handleSorting={handleSorting}
-        isFetching={isFetching}
+        isLoading={isLoading}
       />
       <SelectPerPage
         setPerPage={setPerPage}

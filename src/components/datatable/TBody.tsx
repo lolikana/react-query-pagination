@@ -9,11 +9,11 @@ type Props<T> = {
   tableData: T[];
   columns: ITableColumns[];
   emptyData: string;
-  isFetching: boolean;
+  isLoading: boolean;
 };
 
 const TBody = <T extends Record<string, any>>(props: Props<T>) => {
-  const { tableData, columns, emptyData, isFetching } = props;
+  const { tableData, columns, emptyData, isLoading } = props;
 
   if (tableData.length === 0)
     return (
@@ -24,11 +24,11 @@ const TBody = <T extends Record<string, any>>(props: Props<T>) => {
       </tbody>
     );
 
-  if (isFetching) {
+  if (isLoading) {
     return (
       <tbody>
         <tr className={styles.container__table_empty}>
-          <td colSpan={columns.length + 1}>Fetching data</td>
+          <td colSpan={columns.length + 1}>Loading data</td>
         </tr>
       </tbody>
     );
