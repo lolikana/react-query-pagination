@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect } from 'react';
 
-import { getUsers, getUsersTotal } from '@/hooks/useUsers';
+import { getDatas, getDatasTotal } from '@/hooks/useUsers';
 import { queryClient } from '@/libs/ReactQuery';
 
 import styles from '../styles/Home.module.scss';
@@ -11,15 +11,15 @@ export default function Home() {
   useEffect(() => {
     queryClient.prefetchQuery({
       queryKey: ['users', 'first_name', 'asc', 1, '5'],
-      queryFn: () => getUsers('first_name', 'asc', 1, '5')
+      queryFn: () => getDatas('users', 'first_name', 'asc', 1, '5')
     });
     queryClient.prefetchQuery({
       queryKey: ['users', 'first_name', 'asc', 2, '5'],
-      queryFn: () => getUsers('first_name', 'asc', 2, '5')
+      queryFn: () => getDatas('users', 'first_name', 'asc', 2, '5')
     });
     queryClient.prefetchQuery({
       queryKey: ['usersTotal'],
-      queryFn: () => getUsersTotal()
+      queryFn: () => getDatasTotal()
     });
   }, []);
 
