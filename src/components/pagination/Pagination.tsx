@@ -11,8 +11,6 @@ type Props = {
   siblingCount: number;
   currentPage: number;
   pageSize: number;
-  sortBy: string;
-  order: string;
 };
 
 const Pagination: FC<Props> = props => {

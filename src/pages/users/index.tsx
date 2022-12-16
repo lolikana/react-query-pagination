@@ -87,8 +87,6 @@ const Users: NextPage = () => {
             pageSize={Number(perPage)}
             onPageChange={setActivePage}
             siblingCount={1}
-            sortBy={sortBy}
-            order={order}
           />
         </>
       )}
