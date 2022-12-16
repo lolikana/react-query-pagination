@@ -9,11 +9,10 @@ type Props<T> = {
   tableData: T[];
   columns: ITableColumns[];
   emptyData: string;
-  isLoading: boolean;
 };
 
 const TBody = <T extends Record<string, any>>(props: Props<T>) => {
-  const { tableData, columns, emptyData, isLoading } = props;
+  const { tableData, columns, emptyData } = props;
 
   if (tableData.length === 0)
     return (
@@ -24,15 +23,6 @@ const TBody = <T extends Record<string, any>>(props: Props<T>) => {
       </tbody>
     );
 
-  if (isLoading) {
-    return (
-      <tbody>
-        <tr className={styles.container__table_empty}>
-          <td colSpan={columns.length + 1}>Loading data</td>
-        </tr>
-      </tbody>
-    );
-  }
   return (
     <tbody>
       {tableData.map(data => (

@@ -66,27 +66,32 @@ const Users: NextPage = () => {
 
   return (
     <>
-      <Table
-        data={data ? data : []}
-        columns={USER_LIST_COLUMNS}
-        emptyData="no users found"
-        handleSorting={handleSorting}
-        isLoading={isLoading}
-      />
-      <SelectPerPage
-        setPerPage={setPerPage}
-        setActivePage={setActivePage}
-        perPage={perPage}
-      />
-      <Paginations
-        currentPage={activePage}
-        totalCount={dataTotal ? +dataTotal.total : 0}
-        pageSize={Number(perPage)}
-        onPageChange={setActivePage}
-        siblingCount={1}
-        sortBy={sortBy}
-        order={order}
-      />
+      {isLoading ? (
+        <div>Loading data</div>
+      ) : (
+        <>
+          <Table
+            data={data ? data : []}
+            columns={USER_LIST_COLUMNS}
+            emptyData="no users found"
+            handleSorting={handleSorting}
+          />
+          <SelectPerPage
+            setPerPage={setPerPage}
+            setActivePage={setActivePage}
+            perPage={perPage}
+          />
+          <Paginations
+            currentPage={activePage}
+            totalCount={dataTotal ? +dataTotal.total : 0}
+            pageSize={Number(perPage)}
+            onPageChange={setActivePage}
+            siblingCount={1}
+            sortBy={sortBy}
+            order={order}
+          />
+        </>
+      )}
       <Link
         href={'/'}
         style={{

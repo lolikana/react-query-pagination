@@ -11,11 +11,10 @@ type Props<T> = {
   columns: ITableColumns[];
   emptyData: string;
   handleSorting: (sortField: string, sortOrder: 'asc' | 'desc') => void;
-  isLoading: boolean;
 };
 
 const Table = <T extends Record<string, any>>(props: Props<T>) => {
-  const { data, columns, emptyData, handleSorting, isLoading } = props;
+  const { data, columns, emptyData, handleSorting } = props;
   const [reloadData, setReloadData] = useState(data);
 
   useEffect(() => {
@@ -27,11 +26,7 @@ const Table = <T extends Record<string, any>>(props: Props<T>) => {
       <div className={styles.container}>
         <table className={styles.container__table}>
           <THead {...{ columns, handleSorting }} />
-          <TBody
-            {...{ columns, emptyData }}
-            tableData={reloadData}
-            isLoading={isLoading}
-          />
+          <TBody {...{ columns, emptyData }} tableData={reloadData} />
         </table>
       </div>
     </>
