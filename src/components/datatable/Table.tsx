@@ -42,7 +42,7 @@ const Table = (props: Props) => {
   useEffect(() => {
     router.push(
       {
-        pathname: '/users',
+        pathname: `${queryUrl}`,
         query: {
           sortBy: sortBy,
           order: order,
