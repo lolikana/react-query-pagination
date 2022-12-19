@@ -12,9 +12,14 @@ export const getDatas = async (
   activePage: number,
   perPage: string
 ): Promise<TUser[]> => {
-  const res = await axios.get(
-    `${url}/${queryUrl}?sortBy=${sortBy}&order=${order}&limit=${perPage}&page=${activePage}`
-  );
+  const res = await axios.get(`${url}/${queryUrl}`, {
+    params: {
+      sortBy,
+      order,
+      limit: perPage,
+      page: activePage
+    }
+  });
   const { data } = res;
   return data;
 };
