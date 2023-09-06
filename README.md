@@ -1,34 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# User Data Pagination Table
+
+This project is a practice exercise for using React Query by Tanstack to fetch and display a list of users with pagination and filtering options. In production, the data is fetched from a remote API, specifically [https://mockapi.io/](https://mockapi.io/). In development, we use JSON Server to simulate the API locally.
+
+## Technologies Used
+
+- React
+- React Query by Tanstack
+- Axios for HTTP requests
+- JSON Server (for development)
+- Next.js
+- TypeScript
+- SASS (for styling)
+- ESLint and Prettier for code formatting
+- Husky and lint-staged for pre-commit hooks
 
 ## Getting Started
 
-First, run the development server:
+To run this project locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/user-data-pagination.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd user-data-pagination
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+   
+## Features
+
+- **User List**: Fetch and display a list of users.
+- **Pagination**: Navigate through different pages of user data.
+
+## Environment Variables
+
+In your project, you can set environment variables for different environments (development and production) to control where the user data is fetched from. Create a `.env.local` file in the root of your project and add the following variables:
+
+```env
+# Use the remote API in production
+MOCK_API=https://mockapi.io/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Make sure to replace the URLs with your actual API endpoints.
