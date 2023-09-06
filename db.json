@@ -1,4 +1,7 @@
 {
+  "usersTotal": {
+    "total": "100"
+  },
   "users": [
     {
       "createdAt": "2023-09-05T18:27:56.410Z",
