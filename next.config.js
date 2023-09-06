@@ -5,6 +5,9 @@ const nextConfig = {
   eslint: {
     dirs: ['pages', 'utils'] // Only run ESLint on the 'pages' and 'utils' directories during production builds (next build)
   },
+  env: {
+    MOCK_API: process.env.MOCK_API
+  },
   images: {
     remotePatterns: [
       {

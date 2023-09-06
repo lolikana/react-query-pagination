@@ -3,10 +3,7 @@ import axios from 'axios';
 
 import { TUser, TUsersTotal } from '@/libs/types';
 const isProduction = process.env.NODE_ENV === 'production';
-const url = isProduction
-  ? 'https://63992ce7fe03352a94e80a19.mockapi.io'
-  : 'http://localhost:4000';
-
+const url = isProduction ? process.env.MOCK_API : 'http://localhost:4000';
 export const getDatas = async (
   queryUrl: string,
   sortBy: string | null,
