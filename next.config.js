@@ -10,13 +10,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'reqres.in',
-        port: '',
         pathname: '/img/**'
       },
       {
         protocol: 'https',
         hostname: 'cloudflare-ipfs.com',
-        port: '',
         pathname: '/ipfs/**'
       }
     ]
