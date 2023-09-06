@@ -13,10 +13,11 @@ type Props = {
   setPerPage: Dispatch<SetStateAction<string>>;
   setActivePage: Dispatch<SetStateAction<number>>;
   perPage: string;
+  totalUsers: number;
 };
 
 const SelectPerPage: FC<Props> = props => {
-  const { setPerPage, setActivePage, perPage } = props;
+  const { setPerPage, setActivePage, perPage, totalUsers } = props;
   const [value, setValue] = useState<string>();
 
   const perPageHandler = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -24,6 +25,8 @@ const SelectPerPage: FC<Props> = props => {
     setPerPage(value);
     setActivePage(1);
   };
+
+  const options = [5, 10, 25, 50, 100].filter(option => option <= totalUsers);
 
   useEffect(() => {
     setValue(perPage);
@@ -33,8 +36,11 @@ const SelectPerPage: FC<Props> = props => {
     <div className={styles.form__group}>
       <label htmlFor="showPer">Show per page: </label>
       <select name="showPer" value={value} id="shorPer" onChange={perPageHandler}>
-        <option value="5">5</option>
-        <option value="10">10</option>
+        {options.map(option => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
       </select>
     </div>
   );

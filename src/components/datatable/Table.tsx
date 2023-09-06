@@ -87,6 +87,7 @@ const Table = (props: Props) => {
         setPerPage={setPerPage}
         setActivePage={setActivePage}
         perPage={perPage}
+        totalUsers={dataTotal ? +dataTotal.total : 0}
       />
       <Pagination
         currentPage={activePage}
